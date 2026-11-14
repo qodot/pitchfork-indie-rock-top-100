@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indie Rock Top 100</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#121110;--ink:#f2ead8;--dim:#a39c8c;--line:#3a3631}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Space Mono",monospace;font-size:15px;line-height:1.5;padding:16px}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto}
+header{padding:36px 0 26px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.kick{font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:12px;color:var(--dim)}
+h1{margin:10px 0 12px;font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(44px,9vw,96px);line-height:.95}
+h1 span{color:#ff5a1f}
+header p{margin:0;max-width:620px;color:#d6cfbf}
+header p a{text-decoration-thickness:1px;text-underline-offset:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px}
+.style{
+  display:flex;flex-direction:column;text-decoration:none;min-height:230px;padding:18px;
+  background:var(--c);color:var(--t);position:relative;overflow:hidden;
+  transition:transform .18s ease;
+}
+.style:hover,.style:focus-visible{transform:translateY(-4px)}
+.style:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.style .n{font-family:"Anton",sans-serif;font-size:15px;letter-spacing:2px;opacity:.75}
+.style h2{margin:6px 0 8px;font-family:var(--f);font-weight:400;font-size:var(--fs,30px);line-height:1.05}
+.style p{margin:0;font-size:13px;line-height:1.5;opacity:.9}
+.style .go{margin-top:auto;padding-top:14px;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+footer{margin:34px 0 10px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Permanent+Marker&family=Bungee&family=Oswald:wght@700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kick">One list, six ways to flip through it</div>
+    <h1>Indie Rock <span>Top 100</span></h1>
+    <p>A fan-made index of Pitchfork's <a href="https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/" target="_blank" rel="noopener">“The 100 Best Indie Rock Albums of All Time”</a>, ranked 1 to 100, in six different skins. Every album links straight to its review in the original story. Wondering where the line is? Read <a href="https://pitchfork.com/story/what-is-indie-rock-we-asked-33-artists-labels-and-critics/" target="_blank" rel="noopener">“What Is Indie Rock? We Asked 33 Artists, Labels, and Critics”</a>.</p>
+  </header>
+
+  <main class="grid">
+    <a class="style" href="vintage.html" style="--c:#0b0b1a;--t:#ffd400;--f:'Press Start 2P',monospace;--fs:20px">
+      <span class="n">01</span><h2>Vintage Web</h2>
+      <p>A 1999 homepage with a Winamp-style player, an LCD now-playing screen, a marquee and a visitor counter.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="style" href="zine.html" style="--c:#ecE8dc;--t:#141210;--f:'Permanent Marker',cursive">
+      <span class="n">02</span><h2>Photocopied Zine</h2>
+      <p>Ransom-note headlines, masking tape, red label stamps and cassette J-cards, straight out of a copy shop.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="style" href="crate.html" style="--c:#a3241c;--t:#fbf3df;--f:'Bungee',sans-serif;--fs:26px">
+      <span class="n">03</span><h2>Record Store</h2>
+      <p>Dig through ten crates, pull a record and drop it on the listening-station turntable.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="style" href="posters.html" style="--c:#ffd400;--t:#16130f;--f:'Anton',sans-serif;--fs:34px">
+      <span class="n">04</span><h2>GIG POSTER WALL</h2>
+      <p>A hundred silkscreen show posters wheat-pasted on a wall. Tap one to grab a ticket.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="style" href="radio.html" style="--c:#2a2c2f;--t:#ffb12a;--f:'Oswald',sans-serif;--fs:30px">
+      <span class="n">05</span><h2>COLLEGE RADIO</h2>
+      <p>A late-night DJ booth with an ON AIR light, VU meters and a handwritten green-bar program log.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="style" href="vhs.html" style="--c:#15102a;--t:#ff2e88;--f:'Rubik Mono One',sans-serif;--fs:24px">
+      <span class="n">06</span><h2>LATE NIGHT VHS</h2>
+      <p>A 90s late-night music video channel on a CRT, with VCR on-screen text and the classic video credit block.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+  </main>
+
+  <footer>Unofficial and non-commercial. The ranking and reviews belong to Pitchfork, and cover art loads from Pitchfork's image server.</footer>
+</div>
+</body>
+</html>
