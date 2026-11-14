@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indie Rock 100 Zine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#ecE8dc;
+  --paper-2:#f6f3ea;
+  --ink:#141210;
+  --ink-soft:#3b3833;
+  --gray:#8a857a;
+  --red:#d2231b;
+  --tape:rgba(232,220,170,.82);
+  --hi:#fff23a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Special Elite","Courier New",monospace;
+  font-size:16px;line-height:1.5;
+  padding:16px;
+  position:relative;
+}
+/* photocopy grain */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.22;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* toner streak at the edges */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:49;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.18),transparent 3%,transparent 97%,rgba(0,0,0,.14)),
+    linear-gradient(transparent 0 38%,rgba(0,0,0,.035) 38% 38.4%,transparent 38.4%);
+}
+a{color:inherit}
+.wrap{max-width:820px;margin:0 auto;position:relative}
+
+/* ---------- tape ---------- */
+.tape{
+  position:absolute;width:86px;height:24px;background:var(--tape);
+  box-shadow:0 1px 1px rgba(0,0,0,.12);
+  clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,4% 96%,0 50%);
+  z-index:3;
+}
+
+/* ---------- masthead ---------- */
+.mast{position:relative;padding:28px 8px 18px;text-align:center}
+.issue{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-size:14px;text-transform:uppercase;letter-spacing:2px;
+  border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:6px 2px;margin-bottom:22px;
+}
+.ransom{
+  margin:0;line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 4px;
+  font-size:clamp(34px,10vw,84px);
+}
+.ransom .word{display:inline-flex;gap:3px;margin:0 .18em}
+.ransom .l{display:inline-block;padding:.04em .12em .02em;box-shadow:2px 3px 0 rgba(0,0,0,.25)}
+.l.a{font-family:"Archivo Black",sans-serif;background:var(--ink);color:var(--paper-2)}
+.l.b{font-family:"Special Elite",monospace;background:#fff;color:var(--ink);border:1px solid #bbb}
+.l.c{font-family:"Permanent Marker",cursive;background:var(--hi);color:var(--ink)}
+.l.d{font-family:"Archivo Black",sans-serif;background:var(--red);color:#fff}
+.l.e{font-family:Georgia,"Times New Roman",serif;font-weight:700;background:#d9d4c4;color:var(--ink);font-style:italic}
+.sub{
+  margin:20px auto 0;max-width:560px;
+  font-family:"Archivo Black",sans-serif;font-size:clamp(16px,3.6vw,26px);
+  text-transform:uppercase;letter-spacing:1px;line-height:1.15;
+}
+.sub .scrawl{
+  display:block;margin-top:8px;font-family:"Permanent Marker",cursive;text-transform:none;
+  font-size:clamp(17px,3.4vw,22px);color:var(--red);transform:rotate(-2deg);letter-spacing:0;
+}
+.source{
+  position:relative;display:inline-block;margin-top:24px;max-width:100%;
+  background:#fff;padding:12px 16px 10px;text-decoration:none;
+  transform:rotate(1.2deg);box-shadow:3px 4px 0 rgba(0,0,0,.18);
+  border:1px solid #cfc9b8;text-align:left;
+}
+.source .tape{top:-12px;left:50%;margin-left:-43px;transform:rotate(-4deg)}
+.source small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
+.source b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:17px;text-decoration:underline;text-decoration-thickness:2px}
+.source:hover b{background:var(--hi)}
+.source.alt{margin-top:18px;transform:rotate(-1.4deg);background:var(--hi);border-color:#d8cf2a}
+.source.alt .tape{left:auto;right:18px;margin-left:0;transform:rotate(6deg)}
+.source.alt small{color:var(--ink-soft)}
+.source.alt:hover b{background:#fff}
+
+/* cassette */
+.cassette{display:block;margin:24px auto 0;width:min(260px,70vw);height:auto}
+.cassette .reel{transform-box:fill-box;transform-origin:center;animation:reel 2.4s linear infinite}
+@keyframes reel{to{transform:rotate(360deg)}}
+
+/* ---------- sides ---------- */
+.side-head{
+  display:flex;align-items:center;gap:12px;margin:34px 0 14px;
+}
+.side-head h2{
+  margin:0;font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(22px,5vw,34px);
+  background:var(--ink);color:var(--paper-2);padding:4px 14px 2px;transform:rotate(-1.5deg);
+}
+.side-head span{font-family:"Permanent Marker",cursive;font-size:20px;color:var(--ink-soft)}
+.side-head::after{content:"";flex:1;border-top:3px dashed var(--ink)}
+
+ol.list{list-style:none;margin:0;padding:0}
+ol.list li{margin:0 0 14px}
+
+details.rec{
+  position:relative;background:var(--paper-2);
+  border:1px solid #d3cdbb;box-shadow:2px 3px 0 rgba(0,0,0,.14);
+}
+ol.list li:nth-child(odd) details.rec{transform:rotate(-.35deg)}
+ol.list li:nth-child(even) details.rec{transform:rotate(.3deg)}
+details.rec[open]{transform:none!important;box-shadow:5px 6px 0 rgba(0,0,0,.2)}
+
+details.rec summary{
+  list-style:none;cursor:pointer;
+  display:grid;grid-template-columns:76px 84px 1fr auto;align-items:center;gap:14px;
+  padding:12px 16px 12px 10px;
+}
+details.rec summary::-webkit-details-marker{display:none}
+details.rec summary:hover .album{background:linear-gradient(transparent 55%,var(--hi) 55% 92%,transparent 92%)}
+details.rec summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+.num{
+  font-family:"Archivo Black",sans-serif;font-size:46px;line-height:.9;text-align:right;
+  letter-spacing:-2px;color:var(--ink);
+}
+.num small{display:block;font-family:"Special Elite",monospace;font-size:11px;letter-spacing:2px;color:var(--gray);text-align:right;margin-bottom:2px}
+.top .num{color:var(--red)}
+
+.pic{position:relative;width:84px;height:84px}
+.pic img{
+  display:block;width:84px;height:84px;object-fit:cover;background:#bbb;
+  filter:grayscale(1) contrast(1.45) brightness(1.05);
+  border:3px solid #fff;box-shadow:1px 2px 3px rgba(0,0,0,.3);
+  transition:filter .3s ease;
+}
+.pic .tape{width:46px;height:16px;top:-7px;left:19px;transform:rotate(-8deg)}
+details.rec[open] .pic img,details.rec summary:hover .pic img{filter:none}
+
+.who{min-width:0}
+.artist{font-family:"Special Elite",monospace;font-size:15px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-soft)}
+.album{
+  display:inline;font-family:"Permanent Marker",cursive;font-size:24px;line-height:1.2;
+}
+.tags{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:8px}
+.stamp{
+  display:inline-block;padding:2px 8px 1px;
+  font-family:"Archivo Black",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--red);border:2px solid var(--red);border-radius:3px;
+  transform:rotate(-3deg);opacity:.88;
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -2.2 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -2.2 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.yr{font-family:"Special Elite",monospace;font-size:16px;border-bottom:2px solid var(--ink);padding:0 2px;line-height:1.1}
+
+.toggle{
+  font-family:"Permanent Marker",cursive;font-size:30px;line-height:1;width:36px;text-align:center;
+  transition:transform .25s ease;color:var(--ink);
+}
+details.rec[open] .toggle{transform:rotate(45deg);color:var(--red)}
+
+/* ---------- J-card ---------- */
+.jcard{
+  margin:0 12px 14px;border:2px solid var(--ink);background:#fff;
+  display:grid;grid-template-columns:220px 34px 1fr;
+}
+.jcard .front{background:var(--ink);padding:10px}
+.jcard .front img{display:block;width:100%;height:auto;background:#333}
+.jcard .front .cap{
+  margin-top:8px;color:var(--paper-2);font-family:"Archivo Black",sans-serif;font-size:13px;
+  text-transform:uppercase;letter-spacing:1px;line-height:1.2;
+}
+.jcard .spine{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  border-left:2px solid var(--ink);border-right:2px dashed var(--ink);
+  font-family:"Archivo Black",sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:space-between;padding:10px 0;
+  white-space:nowrap;overflow:hidden;background:var(--hi);
+}
+.jcard .back{
+  padding:12px 16px 14px;
+  background-image:repeating-linear-gradient(transparent 0 29px,#b8d3e6 29px 30px);
+  background-position:0 6px;
+}
+.jcard .back h3{
+  margin:0 0 6px;font-family:"Special Elite",monospace;font-size:13px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--red);font-weight:400;
+}
+.jcard dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;column-gap:12px;line-height:30px}
+.jcard dt{font-family:"Special Elite",monospace;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--gray)}
+.jcard dd{margin:0;font-family:"Permanent Marker",cursive;font-size:19px;line-height:30px;min-width:0;overflow-wrap:anywhere}
+
+.read{
+  position:relative;display:block;text-decoration:none;
+  background:var(--red);color:#fff;padding:12px 16px;margin-bottom:12px;
+  font-family:"Archivo Black",sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:.5px;line-height:1.25;
+  box-shadow:4px 4px 0 var(--ink);
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%,0 62%,6px 50%,0 38%);
+}
+.read em{display:block;font-family:"Special Elite",monospace;font-style:normal;text-transform:none;font-size:13px;opacity:.9;letter-spacing:0;margin-top:2px}
+.read:hover{background:var(--ink)}
+.read:active{transform:translate(2px,2px)}
+
+.listen{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.listen span{font-family:"Special Elite",monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
+.listen a{
+  font-family:"Archivo Black",sans-serif;font-size:13px;text-transform:uppercase;text-decoration:none;
+  padding:5px 12px 4px;border:2px dashed var(--ink);background:var(--paper-2);
+}
+.listen a:hover{background:var(--hi);border-style:solid}
+
+/* ---------- footer ---------- */
+footer{
+  margin:40px 0 10px;padding-top:18px;border-top:3px solid var(--ink);
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;
+}
+footer p{margin:0 0 6px;font-size:14px}
+footer .big{font-family:"Permanent Marker",cursive;font-size:24px;line-height:1.2;color:var(--red);transform:rotate(-1.5deg);display:inline-block;margin-bottom:10px}
+footer .barcode{
+  width:120px;height:52px;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px);
+}
+footer .cat{font-size:12px;letter-spacing:2px;text-align:center}
+
+@media (max-width:620px){
+  details.rec summary{grid-template-columns:44px 64px 1fr;gap:10px;padding:10px}
+  .num{font-size:30px;letter-spacing:-1px}
+  .num small{font-size:9px;letter-spacing:1px}
+  .pic,.pic img{width:64px;height:64px}
+  .pic .tape{left:10px}
+  .toggle{display:none}
+  .album{font-size:19px}
+  .artist{font-size:13px;letter-spacing:1px}
+  .jcard{grid-template-columns:1fr;margin:0 8px 10px}
+  .jcard .front{display:flex;gap:10px;align-items:flex-end}
+  .jcard .front img{width:140px}
+  .jcard .spine{writing-mode:horizontal-tb;transform:none;border:0;border-top:2px solid var(--ink);border-bottom:2px dashed var(--ink);padding:4px 10px}
+  footer{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="issue"><span>Issue #1</span><span>Free / or trade a tape</span><span>Made in a copy shop at 3am</span></div>
+
+    <h1 class="ransom" aria-label="Indie Rock 100" id="ransom"></h1>
+
+    <p class="sub">The 100 best indie rock albums of all time,<br>counted down from the top.
+      <span class="scrawl">no major labels allowed. play it loud!!</span>
+    </p>
+
+    <a class="source" href="https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/" target="_blank" rel="noopener">
+      <span class="tape"></span>
+      <small>Ranking and reviews by</small>
+      <b>Pitchfork: “The 100 Best Indie Rock Albums of All Time” &rarr;</b>
+    </a><br>
+    <a class="source alt" href="https://pitchfork.com/story/what-is-indie-rock-we-asked-33-artists-labels-and-critics/" target="_blank" rel="noopener">
+      <span class="tape"></span>
+      <small>Wait, what even is indie rock? Read</small>
+      <b>“What Is Indie Rock? We Asked 33 Artists, Labels, and Critics” &rarr;</b>
+    </a>
+
+    <svg class="cassette" viewBox="0 0 260 166" aria-hidden="true">
+      <rect x="3" y="3" width="254" height="160" rx="10" fill="#141210"/>
+      <rect x="18" y="16" width="224" height="92" rx="4" fill="#f6f3ea"/>
+      <rect x="18" y="16" width="224" height="20" fill="#d2231b"/>
+      <text x="28" y="31" font-family="Archivo Black, sans-serif" font-size="12" fill="#fff" letter-spacing="1">SIDE A + B  /  100 TRACKS</text>
+      <line x1="30" y1="52" x2="230" y2="52" stroke="#b8d3e6" stroke-width="1.5"/>
+      <text x="32" y="50" font-family="Permanent Marker, cursive" font-size="14" fill="#141210">indie rock 4 ever</text>
+      <rect x="62" y="62" width="136" height="38" rx="19" fill="#141210"/>
+      <g class="reel"><circle cx="86" cy="81" r="14" fill="#f6f3ea"/><path d="M86 70v6M86 86v6M75 81h6M91 81h6" stroke="#141210" stroke-width="3"/></g>
+      <g class="reel"><circle cx="174" cy="81" r="14" fill="#f6f3ea"/><path d="M174 70v6M174 86v6M163 81h6M179 81h6" stroke="#141210" stroke-width="3"/></g>
+      <rect x="112" y="72" width="36" height="18" fill="#5a4630"/>
+      <path d="M58 163l12-36h120l12 36z" fill="#2a2724"/>
+      <circle cx="96" cy="146" r="5" fill="#141210"/><circle cx="164" cy="146" r="5" fill="#141210"/>
+    </svg>
+  </header>
+
+  <main id="list"></main>
+
+  <footer>
+    <div>
+      <span class="big">tape it. trade it. pass it on.</span>
+      <p>An unofficial, fan-made index. The ranking and every review belong to Pitchfork. Tap a record, then hit the red ticket to read the write-up in the original story.</p>
+      <p>Cover art loads from Pitchfork's image server.</p>
+    </div>
+    <div><div class="barcode" aria-hidden="true"></div><div class="cat">CAT. NO. IR-100</div></div>
+  </footer>
+</div>
+
+<script>
+const ALBUMS = [{"rank": 1, "artist": "Pavement", "album": "Crooked Rain, Crooked Rain", "img": "https://media.pitchfork.com/photos/6aee2be7ac3c503f2a26a67d/master/w_320,c_limit/pavement.jpg", "label": "Matador", "year": "1994", "links": [["Bandcamp", "https://pavement.bandcamp.com/album/crooked-rain-crooked-rain"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Pavement%3A%20Crooked%20Rain%2C%20Crooked%20Rain"}, {"rank": 2, "artist": "Liz Phair", "album": "Exile in Guyville", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e354b/master/w_320,c_limit/Liz%20Phair%20%E2%80%93%20Exile%20in%20Guyville.jpg", "label": "Matador", "year": "1993", "links": [["Bandcamp", "https://lizphair.bandcamp.com/album/exile-in-guyville-2018-remaster"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Liz%20Phair%3A%20Exile%20in%20Guyville"}, {"rank": 3, "artist": "Sonic Youth", "album": "Daydream Nation", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba94/master/w_320,c_limit/Sonic%20Youth%20%E2%80%93%20Daydream%20Nation.jpg", "label": "Enigma", "year": "1988", "links": [["Bandcamp", "https://sonicyouth.bandcamp.com/album/daydream-nation"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Sonic%20Youth%3A%20Daydream%20Nation"}, {"rank": 4, "artist": "Elliott Smith", "album": "Either/Or", "img": "https://media.pitchfork.com/photos/6aee2be62e98f66215d0ba87/master/w_320,c_limit/Elliott%20Smith%20%E2%80%93%20Either-Or.jpg", "label": "Kill Rock Stars", "year": "1997", "links": [["Bandcamp", "https://elliottsmith.bandcamp.com/album/either-or"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Elliott%20Smith%3A%20Either%2FOr"}, {"rank": 5, "artist": "Neutral Milk Hotel", "album": "In the Aeroplane Over the Sea", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c67/master/w_320,c_limit/Neutral%20Milk%20Hotel%20%E2%80%93%20In%20the%20Aeroplane%20Over%20the%20Sea.jpg", "label": "Merge", "year": "1998", "links": [["Bandcamp", "https://neutralmilkhotel.bandcamp.com/album/in-the-aeroplane-over-the-sea**"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Neutral%20Milk%20Hotel%3A%20In%20the%20Aeroplane%20Over%20the%20Sea"}, {"rank": 6, "artist": "Silver Jews", "album": "American Water", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eeca/master/w_320,c_limit/Silver%20Jews%20%E2%80%93%20American%20Water.jpg", "label": "Drag City", "year": "1998", "links": [["Bandcamp", "https://silverjews.bandcamp.com/album/american-water"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Silver%20Jews%3A%20American%20Water"}, {"rank": 7, "artist": "Destroyer", "album": "Kaputt", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a664/master/w_320,c_limit/Destroyer%20%E2%80%93%20Kaputt.jpg", "label": "Merge/Dead Oceans", "year": "2011", "links": [["Bandcamp", "https://destroyer.bandcamp.com/album/kaputt"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Destroyer%3A%20Kaputt"}, {"rank": 8, "artist": "Yo La Tengo", "album": "Painful", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2641/master/w_320,c_limit/Yo%20La%20Tengo%20%E2%80%93%20Painful.jpg", "label": "Matador", "year": "1993", "links": [["Bandcamp", "https://yolatengo.bandcamp.com/album/painful"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Yo%20La%20Tengo%3A%20Painful"}, {"rank": 9, "artist": "Sleater-Kinney", "album": "Dig Me Out", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba95/master/w_320,c_limit/Sleater-Kinney%20%E2%80%93%20Dig%20Me%20Out.jpg", "label": "Kill Rock Stars", "year": "1997", "links": [["Bandcamp", "https://sleaterkinney.bandcamp.com/album/dig-me-out-remastered"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Sleater%2DKinney%3A%20Dig%20Me%20Out"}, {"rank": 10, "artist": "Cindy Lee", "album": "Diamond Jubilee", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e355f/master/w_320,c_limit/Cindy%20Lee%20%E2%80%93%20Diamond%20Jubilee.jpg", "label": "Realistik/Superior Viaduct", "year": "2024", "links": [["Bandcamp", "https://cindylee.bandcamp.com/album/diamond-jubilee"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Cindy%20Lee%3A%20Diamond%20Jubilee"}, {"rank": 11, "artist": "Broken Social Scene", "album": "You Forgot It in People", "img": "https://media.pitchfork.com/photos/6aee2be778d0dfa19820eef4/master/w_320,c_limit/Broken%20Social%20Scene%20%E2%80%94%20You%20Forgot%20it%20in%20People.png", "label": "Arts & Crafts/Paper Bag", "year": "2002", "links": [["Bandcamp", "https://brokensocialscene.bandcamp.com/album/you-forgot-it-in-people"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Broken%20Social%20Scene%3A%20You%20Forgot%20It%20in%20People"}, {"rank": 12, "artist": "Modest Mouse", "album": "The Lonesome Crowded West", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a65f/master/w_320,c_limit/Modest%20Mouse%20%E2%80%93%20The%20Lonesome%20Crowded%20West.jpg", "label": "Up", "year": "1997", "links": [["Bandcamp", "https://modestmouse.bandcamp.com/album/the-lonesome-crowded-west"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Modest%20Mouse%3A%20The%20Lonesome%20Crowded%20West"}, {"rank": 13, "artist": "Cat Power", "album": "Moon Pix", "img": "https://media.pitchfork.com/photos/6aee2be706e89e006e0faf1e/master/w_320,c_limit/Cat%20Power%20%E2%80%93%20Moon%20Pix.jpg", "label": "Matador", "year": "1998", "links": [["Bandcamp", "https://catpower.bandcamp.com/album/moon-pix"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Cat%20Power%3A%20Moon%20Pix"}, {"rank": 14, "artist": "Guided by Voices", "album": "Bee Thousand", "img": "https://media.pitchfork.com/photos/6aee2be62e98f66215d0ba85/master/w_320,c_limit/Bee%20Thousand%20%E2%80%94%20Guided%20by%20Voices.jpg", "label": "Scat", "year": "1994", "links": [["Bandcamp", "https://guidedbyvoices.bandcamp.com/album/bee-thousand"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Guided%20by%20Voices%3A%20Bee%20Thousand"}, {"rank": 15, "artist": "Wilco", "album": "Yankee Hotel Foxtrot", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3566/master/w_320,c_limit/Wilco%20%E2%80%93%20Yankee%20Hotel%20Foxtrot.jpg", "label": "Self-released/Nonesuch", "year": "2001", "links": [["Bandcamp", "https://wilcohq.bandcamp.com/album/yankee-hotel-foxtrot"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Wilco%3A%20Yankee%20Hotel%20Foxtrot"}, {"rank": 16, "artist": "Minutemen", "album": "Double Nickels on the Dime", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9ea/master/w_320,c_limit/Minutemen%20%E2%80%94%20Double%20Nickels%20on%20the%20Dime.jpg", "label": "SST", "year": "1989", "links": [["Apple Music", "https://music.apple.com/us/album/double-nickels-on-the-dime/117012391"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Minutemen%3A%20Double%20Nickels%20on%20the%20Dime"}, {"rank": 17, "artist": "The Microphones", "album": "The Glow, Pt. 2", "img": "https://media.pitchfork.com/photos/6aee2be7ac3c503f2a26a675/master/w_320,c_limit/The%20Microphones%20%E2%80%93%20The%20Glow,%20Pt.%202.jpg", "label": "K", "year": "2001", "links": [["Bandcamp", "https://pwelverumandsun.bandcamp.com/album/the-glow-pt-2"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Microphones%3A%20The%20Glow%2C%20Pt.%202"}, {"rank": 18, "artist": "Sufjan Stevens", "album": "Illinois", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2658/master/w_320,c_limit/Sufjan%20Stevens%20%E2%80%93%20Illinois.jpg", "label": "Asthmatic Kitty", "year": "2005", "links": [["Bandcamp", "https://sufjanstevens.bandcamp.com/album/illinois"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Sufjan%20Stevens%3A%20Illinois"}, {"rank": 19, "artist": "Arcade Fire", "album": "Funeral", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3546/master/w_320,c_limit/Arcade%20Fire%20%E2%80%93%20Funeral.jpg", "label": "Merge", "year": "2004", "links": [["Apple Music", "https://music.apple.com/us/album/funeral/1249417623"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Arcade%20Fire%3A%20Funeral"}, {"rank": 20, "artist": "TV on the Radio", "album": "Desperate Youth, Bloodthirsty Babes", "img": "https://media.pitchfork.com/photos/6aee2be778d0dfa19820eeef/master/w_320,c_limit/TV%20on%20the%20Radio%20%E2%80%93%20Desperate%20Youth,%20Bloodthirsty%20Babes.jpg", "label": "Touch & Go/4AD", "year": "2004", "links": [["Bandcamp", "https://tvontheradio.bandcamp.com/album/desperate-youth-blood-thirsty-babes-20th-anniversary-edition"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=TV%20on%20the%20Radio%3A%20Desperate%20Youth%2C%20Bloodthirsty%20Babes"}, {"rank": 21, "artist": "Life Without Buildings", "album": "Any Other City", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9d5/master/w_320,c_limit/Life%20Without%20Buildings%20%E2%80%93%20Any%20Other%20City.jpg", "label": "Tugboat/DC/Baltimore", "year": "2001", "links": [["Apple Music", "https://music.apple.com/us/album/any-other-city/889981611"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Life%20Without%20Buildings%3A%20Any%20Other%20City"}, {"rank": 22, "artist": "Built to Spill", "album": "There’s Nothing Wrong With Love", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eec4/master/w_320,c_limit/Built%20to%20Spill%20%E2%80%93%20There_s%20Nothing%20Wrong%20With%20Love.jpg", "label": "Up", "year": "1994", "links": [["Bandcamp", "https://built-to-spill.bandcamp.com/album/theres-nothing-wrong-with-love"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Built%20to%20Spill%3A%20There%E2%80%99s%20Nothing%20Wrong%20With%20Love"}, {"rank": 23, "artist": "Deerhunter", "album": "Halcyon Digest", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e354f/master/w_320,c_limit/Deerhunter%20%E2%80%93%20Halcyon%20Digest.jpg", "label": "4AD", "year": "2010", "links": [["Bandcamp", "https://deerhunter.bandcamp.com/album/halcyon-digest"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Deerhunter%3A%20Halcyon%20Digest"}, {"rank": 24, "artist": "Low", "album": "Double Negative", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faef8/master/w_320,c_limit/Low%20%E2%80%93%20Double%20Negative.jpg", "label": "Sub Pop", "year": "2018", "links": [["Bandcamp", "https://lowtheband.bandcamp.com/album/double-negative"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Low%3A%20Double%20Negative"}, {"rank": 25, "artist": "Songs: Ohia", "album": "The Magnolia Electric Co.", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c54/master/w_320,c_limit/Songs-%20Ohia%20%E2%80%93%20Magnolia%20Electric%20Co..jpg", "label": "Secretly Canadian", "year": "2003", "links": [["Bandcamp", "https://songsohia.bandcamp.com/album/magnolia-electric-co-deluxe-edition"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Songs%3A%20Ohia%3A%20The%20Magnolia%20Electric%20Co."}, {"rank": 26, "artist": "Interpol", "album": "Turn on the Bright Lights", "img": "https://media.pitchfork.com/photos/6aee2be5aa16e3fed6ea262d/master/w_320,c_limit/Interpol%20%E2%80%93%20Turn%20on%20the%20Bright%20Lights.jpg", "label": "Matador", "year": "2002", "links": [["Bandcamp", "https://interpol.bandcamp.com/album/turn-on-the-bright-lights"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Interpol%3A%20Turn%20on%20the%20Bright%20Lights"}, {"rank": 27, "artist": "R.E.M.", "album": "Murmur", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a665/master/w_320,c_limit/R.E.M.%20%E2%80%93%20Murmur.jpg", "label": "I.R.S.", "year": "1983", "links": [["Apple Music", "https://music.apple.com/us/album/murmur/1440872981"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=R.E.M.%3A%20Murmur"}, {"rank": 28, "artist": "Smog", "album": "Knock Knock", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c53/master/w_320,c_limit/Smog%20%E2%80%93%20Knock%20Knock.jpg", "label": "Drag City", "year": "1999", "links": [["Bandcamp", "https://smog.bandcamp.com/album/knock-knock"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Smog%3A%20Knock%20Knock"}, {"rank": 29, "artist": "Vampire Weekend", "album": "Modern Vampires of the City", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faf02/master/w_320,c_limit/Vampire%20Weekend%20%E2%80%93%20Modern%20Vampires%20of%20the%20City.jpg", "label": "XL", "year": "2013", "links": [["Apple Music", "https://music.apple.com/us/album/modern-vampires-of-the-city/613184430"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Vampire%20Weekend%3A%20Modern%20Vampires%20of%20the%20City"}, {"rank": 30, "artist": "Sebadoh", "album": "Bakesale", "img": "https://media.pitchfork.com/photos/6aee2be7d19586adfe8e3583/master/w_320,c_limit/Sebadoh%20%E2%80%94%20bakesale.png", "label": "Sub Pop/Domino/City Slang", "year": "1994", "links": [["Apple Music", "https://music.apple.com/us/album/bakesale-deluxe-edition/444189753"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Sebadoh%3A%20Bakesale"}, {"rank": 31, "artist": "Stereolab", "album": "Switched On", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9f8/master/w_320,c_limit/Stereolab%20%E2%80%93%20Switched%20On.jpg", "label": "Too Pure/Sumberland", "year": "1992", "links": [["Bandcamp", "https://stereolab.bandcamp.com/album/switched-on"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Stereolab%3A%20Switched%20On"}, {"rank": 32, "artist": "Geese", "album": "Getting Killed", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557ffe/master/w_320,c_limit/Geese%20%E2%80%93%20Getting%20Killed.jpg", "label": "Partisan/Play It Again Sam", "year": "2025", "links": [["Bandcamp", "https://geesebandnyc.bandcamp.com/album/getting-killed"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Geese%3A%20Getting%20Killed"}, {"rank": 33, "artist": "Beat Happening", "album": "Jamboree", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a652/master/w_320,c_limit/Beat%20Happening%20%E2%80%93%20Jambouree.jpg", "label": "K", "year": "1988", "links": [["Bandcamp", "https://beathappening.bandcamp.com/album/jamboree-klp002"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Beat%20Happening%3A%20Jamboree"}, {"rank": 34, "artist": "The Walkmen", "album": "Bows + Arrows", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a666/master/w_320,c_limit/The%20Walkmen%20%E2%80%93%20Bows%20+%20Arrows.jpg", "label": "Record Collection", "year": "2004", "links": [["Apple Music", "https://music.apple.com/us/album/bows-arrows/5305635"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Walkmen%3A%20Bows%20%2B%20Arrows"}, {"rank": 35, "artist": "Bon Iver", "album": "Bon Iver, Bon Iver", "img": "https://media.pitchfork.com/photos/6aee2be7d1ad83d11d55800b/master/w_320,c_limit/Bon%20Iver%20%E2%80%94%20Bon%20Iver,%20Bon%20Iver.jpg", "label": "Jagjaguwar/4AD", "year": "2011", "links": [["Bandcamp", "https://boniver.bandcamp.com/album/bon-iver"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Bon%20Iver%3A%20Bon%20Iver%2C%20Bon%20Iver"}, {"rank": 36, "artist": "Belle and Sebastian", "album": "If You’re Feeling Sinister", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c3d/master/w_320,c_limit/Belle%20and%20Sebastian%20%E2%80%93%20If%20You%E2%80%99re%20Feeling%20Sinister.jpg", "label": "Jeepster", "year": "1996", "links": [["Bandcamp", "https://belleandsebastian.bandcamp.com/album/if-youre-feeling-sinister"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Belle%20and%20Sebastian%3A%20If%20You%E2%80%99re%20Feeling%20Sinister"}, {"rank": 37, "artist": "Dinosaur Jr.", "album": "Beyond", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c47/master/w_320,c_limit/Dinosaur%20Jr.%20%E2%80%93%20Beyond.jpg", "label": "Fat Possum", "year": "2007", "links": [["Bandcamp", "https://dinosaurjr.bandcamp.com/album/beyond"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Dinosaur%20Jr.%3A%20Beyond"}, {"rank": 38, "artist": "Animal Collective", "album": "Strawberry Jam", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a659/master/w_320,c_limit/Animal%20Collective%20%E2%80%93%20Strawberry%20Jam.jpg", "label": "Domino", "year": "2007", "links": [["Bandcamp", "https://anmlcollectve.bandcamp.com/album/strawberry-jam"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Animal%20Collective%3A%20Strawberry%20Jam"}, {"rank": 39, "artist": "The National", "album": "Boxer", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9e7/master/w_320,c_limit/The%20National%20%E2%80%94%20Boxer.jpg", "label": "Beggars Banquet", "year": "2007", "links": [["Bandcamp", "https://thenational.bandcamp.com/album/boxer"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20National%3A%20Boxer"}, {"rank": 40, "artist": "The Shins", "album": "Chutes Too Narrow", "img": "https://media.pitchfork.com/photos/6aee2be806e89e006e0faf36/master/w_320,c_limit/The%20Shins%20%E2%80%94%20Chutes%20too%20Narrow.png", "label": "Sub Pop", "year": "2003", "links": [["Bandcamp", "https://theshins.bandcamp.com/album/chutes-too-narrow"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Shins%3A%20Chutes%20Too%20Narrow"}, {"rank": 41, "artist": "Girls", "album": "Album", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba8a/master/w_320,c_limit/Girls%20%E2%80%94%20Album.jpg", "label": "True Panther", "year": "2009", "links": [["Apple Music", "https://music.apple.com/sb/album/album/1831220189"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Girls%3A%20Album"}, {"rank": 42, "artist": "Flaming Lips", "album": "In a Priest Driven Ambulance", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3549/master/w_320,c_limit/Flaming%20Lips%20%E2%80%93%20In%20a%20Priest%20Driven%20Ambulance.jpg", "label": "Restless/Enigma", "year": "1990", "links": [["Apple Music", "https://music.apple.com/us/album/in-a-priest-driven-ambulance/331665517"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Flaming%20Lips%3A%20In%20a%20Priest%20Driven%20Ambulance"}, {"rank": 43, "artist": "Julie Doiron", "album": "Broken Girl", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a655/master/w_320,c_limit/Julie%20Doiron%20%E2%80%93%20Broken%20Girl.jpg", "label": "Sub Pop/Sappy", "year": "1996", "links": [["Bandcamp", "https://juliedoiron.bandcamp.com/album/broken-girl"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Julie%20Doiron%3A%20Broken%20Girl"}, {"rank": 44, "artist": "Superchunk", "album": "Here’s Where the Strings Come In", "img": "https://media.pitchfork.com/photos/6aee2be778d0dfa19820eef0/master/w_320,c_limit/Superchunk%20%E2%80%93%20Here%E2%80%99s%20Where%20the%20Strings%20Come%20In.jpg", "label": "Merge", "year": "1995", "links": [["Bandcamp", "https://superchunk.bandcamp.com/album/heres-where-the-strings-come-in-remastered"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Superchunk%3A%20Here%E2%80%99s%20Where%20the%20Strings%20Come%20In"}, {"rank": 45, "artist": "Bright Eyes", "album": "I’m Wide Awake, It’s Morning", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c45/master/w_320,c_limit/Bright%20Eyes%20%E2%80%93%20I%E2%80%99m%20Wide%20Awake,%20It%E2%80%99s%20Morning.jpg", "label": "Saddle Creek", "year": "2005", "links": [["Bandcamp", "https://brighteyes.bandcamp.com/album/im-wide-awake-its-morning-remastered"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Bright%20Eyes%3A%20I%E2%80%99m%20Wide%20Awake%2C%20It%E2%80%99s%20Morning"}, {"rank": 46, "artist": "Mitski", "album": "Bury Me at Makeout Creek", "img": "https://media.pitchfork.com/photos/6aee2be706e89e006e0faf1f/master/w_320,c_limit/Mitski%20%E2%80%93%20Bury%20Me%20at%20Makeout%20Creek.jpg", "label": "Double Double Whammy", "year": "2014", "links": [["Bandcamp", "https://mitski.bandcamp.com/album/bury-me-at-makeout-creek"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Mitski%3A%20Bury%20Me%20at%20Makeout%20Creek"}, {"rank": 47, "artist": "Spoon", "album": "Kill the Moonlight", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2644/master/w_320,c_limit/Spoon%20%E2%80%93%20Kill%20the%20Moonlight.jpg", "label": "Merge/12XU", "year": "2002", "links": [["Bandcamp", "https://spoontheband.bandcamp.com/album/kill-the-moonlight"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Spoon%3A%20Kill%20the%20Moonlight"}, {"rank": 48, "artist": "Rilo Kiley", "album": "The Execution of All Things", "img": "https://media.pitchfork.com/photos/6aee2be82e98f66215d0baaa/master/w_320,c_limit/Rilo%20Kiley%20%E2%80%94%20The%20Execution%20of%20All%20Things.png", "label": "Saddle Creek", "year": "2002", "links": [["Bandcamp", "https://rilokiley.bandcamp.com/album/the-execution-of-all-things"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Rilo%20Kiley%3A%20The%20Execution%20of%20All%20Things"}, {"rank": 49, "artist": "The Stone Roses", "album": "The Stone Roses", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea264b/master/w_320,c_limit/The%20Stone%20Roses%20%E2%80%93%20The%20Stone%20Roses.jpg", "label": "Silvertone", "year": "1989", "links": [["Apple Music", "https://music.apple.com/us/album/the-stone-roses-20th-anniversary-edition-remastered/325190080"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Stone%20Roses%3A%20The%20Stone%20Roses"}, {"rank": 50, "artist": "Big Thief", "album": "Dragon New Warm Mountain I Believe in You", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eebf/master/w_320,c_limit/Big%20Thief%20%E2%80%93%20Dragon%20New%20Warm%20Mountain%20I%20Believe%20in%20You.jpg", "label": "4AD", "year": "2022", "links": [["Bandcamp", "https://bigthief.bandcamp.com/album/dragon-new-warm-mountain-i-believe-in-you"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Big%20Thief%3A%20Dragon%20New%20Warm%20Mountain%20I%20Believe%20in%20You"}, {"rank": 51, "artist": "The Wrens", "album": "The Meadowlands", "img": "https://media.pitchfork.com/photos/6aee2be7d1ad83d11d558012/master/w_320,c_limit/The%20Wrens%20%E2%80%93%20The%20Meadowlands.jpg", "label": "Absolutely Kosher", "year": "2003", "links": [["Bandcamp", "https://thewrens.bandcamp.com/album/the-meadowlands"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Wrens%3A%20The%20Meadowlands"}, {"rank": 52, "artist": "Yeah Yeah Yeahs", "album": "Yeah Yeah Yeahs EP", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c6b/master/w_320,c_limit/Yeah%20Yeah%20Yeahs%20%E2%80%93%20Yeah%20Yeah%20Yeahs.jpg", "label": "Shifty/Wichita/Touch & Go", "year": "2001", "links": [["Bandcamp", "https://yeahyeahyeahs.bandcamp.com/album/yeah-yeah-yeahs"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Yeah%20Yeah%20Yeahs%3A%20Yeah%20Yeah%20Yeahs%20EP"}, {"rank": 53, "artist": "Alex G", "album": "House of Sugar", "img": "https://media.pitchfork.com/photos/6aee2be506e89e006e0faee9/master/w_320,c_limit/Alex%20G%20%E2%80%93%20House%20of%20Sugar.jpg", "label": "Domino", "year": "2019", "links": [["Bandcamp", "https://sandy.bandcamp.com/album/house-of-sugar"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Alex%20G%3A%20House%20of%20Sugar"}, {"rank": 54, "artist": "The Fiery Furnaces", "album": "Blueberry Boat", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faf01/master/w_320,c_limit/The%20Fiery%20Furnaces%20%E2%80%93%20Blueberry%20Boat.jpg", "label": "Rough Trade", "year": "2004", "links": [["Bandcamp", "https://thefieryfurnaces.bandcamp.com/album/blueberry-boat"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Fiery%20Furnaces%3A%20Blueberry%20Boat"}, {"rank": 55, "artist": "The Hold Steady", "album": "Separation Sunday", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557ff4/master/w_320,c_limit/The%20Hold%20Steady%20%E2%80%93%20Separation%20Sunday.jpg", "label": "Frenchkiss", "year": "2005", "links": [["Bandcamp", "https://theholdsteady.bandcamp.com/album/separation-sunday-20-year-anniversary-edition"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Hold%20Steady%3A%20Separation%20Sunday"}, {"rank": 56, "artist": "Grizzly Bear", "album": "Veckatimest", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba8b/master/w_320,c_limit/Grizzly%20Bear%20%E2%80%93%20Veckatimest.jpg", "label": "Warp", "year": "2009", "links": [["Bandcamp", "https://grizzlybearbrooklyn.bandcamp.com/album/veckatimest"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Grizzly%20Bear%3A%20Veckatimest"}, {"rank": 57, "artist": "Kurt Vile", "album": "Wakin on a Pretty Daze", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eec6/master/w_320,c_limit/Kurt%20Vile%20%E2%80%93%20Wakin%20on%20a%20Pretty%20Daze.jpg", "label": "Matador", "year": "2013", "links": [["Bandcamp", "https://kurtvile.bandcamp.com/album/wakin-on-a-pretty-daze"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Kurt%20Vile%3A%20Wakin%20on%20a%20Pretty%20Daze"}, {"rank": 58, "artist": "Waxahatchee", "album": "Saint Cloud", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3562/master/w_320,c_limit/Waxahatchee%20%E2%80%93%20Saint%20Cloud.jpg", "label": "Merge", "year": "2020", "links": [["Bandcamp", "https://waxahatchee.bandcamp.com/album/saint-cloud-2"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Waxahatchee%3A%20Saint%20Cloud"}, {"rank": 59, "artist": "The Clientele", "album": "Strange Geometry", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c5e/master/w_320,c_limit/The%20Clientele%20%E2%80%93%20Strange%20Geometry.jpg", "label": "Merge/Pointy", "year": "2005", "links": [["Bandcamp", "https://theclientele.bandcamp.com/album/strange-geometry"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Clientele%3A%20Strange%20Geometry"}, {"rank": 60, "artist": "Deerhoof", "album": "Apple O’", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faefc/master/w_320,c_limit/Deerhoof%20%E2%80%93%20Apple%20O.jpg", "label": "Kill Rock Stars/5 Rue Christine", "year": "2003", "links": [["Bandcamp", "https://deerhoof.bandcamp.com/album/apple-o"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Deerhoof%3A%20Apple%20O%E2%80%99"}, {"rank": 61, "artist": "Neko Case", "album": "Fox Confessor Brings the Flood", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9ee/master/w_320,c_limit/Neko%20Case%20%E2%80%94%20Fox%20Confessor%20Brings%20the%20Flood.jpg", "label": "ANTI-", "year": "2006", "links": [["Bandcamp", "https://nekocaseofficial.bandcamp.com/album/fox-confessor-brings-the-flood-bonus-track-version"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Neko%20Case%3A%20Fox%20Confessor%20Brings%20the%20Flood"}, {"rank": 62, "artist": "Jim O’Rourke", "album": "Insignificance", "img": "https://media.pitchfork.com/photos/6aee2be706e89e006e0faf04/master/w_320,c_limit/Jim%20O%E2%80%99Rourke%20%E2%80%93%20Insignificance.jpg", "label": "Drag City", "year": "2001", "links": [["Bandcamp", "https://jimorourke.bandcamp.com/album/insignificance"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Jim%20O%E2%80%99Rourke%3A%20Insignificance"}, {"rank": 63, "artist": "Arctic Monkeys", "album": "Whatever People Say I Am, That’s What I’m Not", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a65a/master/w_320,c_limit/Arctic%20Monkeys%20%E2%80%94%20Whatever%20People%20Say%20I%20Am,%20That%E2%80%99s%20What%20I%E2%80%99m%20Not.jpg", "label": "Domino", "year": "2006", "links": [["Apple Music", "https://music.apple.com/us/album/whatever-people-say-i-am-thats-what-im-not/111153953"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Arctic%20Monkeys%3A%20Whatever%20People%20Say%20I%20Am%2C%20That%E2%80%99s%20What%20I%E2%80%99m%20Not"}, {"rank": 64, "artist": "Hop Along", "album": "Painted Shut", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557fee/master/w_320,c_limit/Hop%20Along%20%E2%80%93%20Painted%20Shut.jpg", "label": "Saddle Creek", "year": "2015", "links": [["Bandcamp", "https://hopalong.bandcamp.com/album/painted-shut"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Hop%20Along%3A%20Painted%20Shut"}, {"rank": 65, "artist": "Fleet Foxes", "album": "Fleet Foxes", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0baa6/master/w_320,c_limit/Fleet%20Foxes%20%E2%80%93%20Fleet%20Foxes.jpg", "label": "Sub Pop/Bella Union", "year": "2008", "links": [["Bandcamp", "https://fleetfoxes.bandcamp.com/album/fleet-foxes"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Fleet%20Foxes%3A%20Fleet%20Foxes"}, {"rank": 66, "artist": "Thinking Fellers Union Local 282", "album": "Strangers From the Universe", "img": "https://media.pitchfork.com/photos/6aee2be76de58f9ada4c1c73/master/w_320,c_limit/Thinking%20Fellers%20Union%20Local%20282%20%E2%80%93%20Strangers%20From%20the%20Universe.jpg", "label": "Matador", "year": "1994", "links": [["Bandcamp", "https://tful282.bandcamp.com/album/strangers-from-the-universe"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Thinking%20Fellers%20Union%20Local%20282%3A%20Strangers%20From%20the%20Universe"}, {"rank": 67, "artist": "Death Cab for Cutie", "album": "Transatlanticism", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557ff2/master/w_320,c_limit/Death%20Cab%20for%20Cutie%20%E2%80%93%20Transatlanticism.jpg", "label": "Barsuk", "year": "2003", "links": [["Bandcamp", "https://deathcabforcutie.bandcamp.com/album/transatlanticism"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Death%20Cab%20for%20Cutie%3A%20Transatlanticism"}, {"rank": 68, "artist": "No Age", "album": "Nouns", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faefb/master/w_320,c_limit/No%20Age%20%E2%80%93%20Nouns.jpg", "label": "Sub Pop", "year": "2008", "links": [["Bandcamp", "https://noage.bandcamp.com/album/nouns"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=No%20Age%3A%20Nouns"}, {"rank": 69, "artist": "Dirty Projectors", "album": "Bitte Orca", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faef5/master/w_320,c_limit/Dirty%20Projectors%20%E2%80%93%20Bitte%20Orca.jpg", "label": "Domino", "year": "2009", "links": [["Bandcamp", "https://dirtyprojectors.bandcamp.com/album/bitte-orca"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Dirty%20Projectors%3A%20Bitte%20Orca"}, {"rank": 70, "artist": "Parquet Courts", "album": "Light Up Gold", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2645/master/w_320,c_limit/Parquet%20Courts%20%E2%80%93%20Light%20Up%20Gold.jpg", "label": "Dull Tools/What’s Your Rupture?", "year": "2012", "links": [["Bandcamp", "https://parquetcourts.bandcamp.com/album/light-up-gold-2"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Parquet%20Courts%3A%20Light%20Up%20Gold"}, {"rank": 71, "artist": "The Spinanes", "album": "Manos", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea265a/master/w_320,c_limit/The%20Spinanes%20%E2%80%93%20Manos.jpg", "label": "Sub Pop", "year": "1993", "links": [["Bandcamp", "https://thespinanes.bandcamp.com/album/manos"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Spinanes%3A%20Manos"}, {"rank": 72, "artist": "Titus Andronicus", "album": "The Monitor", "img": "https://media.pitchfork.com/photos/6aee2be66de58f9ada4c1c5c/master/w_320,c_limit/Titus%20Andronicus%20%E2%80%93%20The%20Monitor.jpg", "label": "XL", "year": "2010", "links": [["Bandcamp", "https://titusandronicus.bandcamp.com/album/the-monitor-2021-remaster"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Titus%20Andronicus%3A%20The%20Monitor"}, {"rank": 73, "artist": "Marnie Stern", "album": "This Is It and I Am It and You Are It and So Is That and He Is It and She Is It and It Is It and That Is That", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e354c/master/w_320,c_limit/Marnie%20Stern%20%E2%80%93%20This%20Is%20It%20and%20I%20Am%20It%20and%20You%20Are%20It%20and%20So%20Is%20That%20and%20He%20Is%20It%20and%20She%20Is%20It%20and%20It%20Is%20It%20and%20That%20Is%20That.jpg", "label": "Kill Rock Stars", "year": "2008", "links": [["Bandcamp", "https://marniestern.bandcamp.com/album/this-is-it-i-am-it-you-are-it-so-is-that-he-is-it-she-is-it-it-is-it-that-is-that"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Marnie%20Stern%3A%20This%20Is%20It%20and%20I%20Am%20It%20and%20You%20Are%20It%20and%20So%20Is%20That%20and%20He%20Is%20It%20and%20She%20Is%20It%20and%20It%20Is%20It%20and%20That%20Is%20That"}, {"rank": 74, "artist": "St. Vincent", "album": "Strange Mercy", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3561/master/w_320,c_limit/St.%20Vincent%20%E2%80%93%20Strange%20Mercy.jpg", "label": "4AD", "year": "2011", "links": [["Apple Music", "https://music.apple.com/eg/album/strange-mercy/453456287"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=St.%20Vincent%3A%20Strange%20Mercy"}, {"rank": 75, "artist": "Women", "album": "Public Strain", "img": "https://media.pitchfork.com/photos/6aee3dcbb0fa15a54106c0d0/master/w_320,c_limit/public%20strain.jpg", "label": "Jagjaguwar", "year": "2010", "links": [["Bandcamp", "https://womenband.bandcamp.com/album/public-strain"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Women%3A%20Public%20Strain"}, {"rank": 76, "artist": "Duster", "album": "Stratosphere", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557ff0/master/w_320,c_limit/Duster%20%E2%80%93%20Stratosphere.jpg", "label": "Up", "year": "1998", "links": [["Bandcamp", "https://dusternumero.bandcamp.com/album/stratosphere"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Duster%3A%20Stratosphere"}, {"rank": 77, "artist": "The Feelies", "album": "Crazy Rhythms", "img": "https://media.pitchfork.com/photos/6aee2be778d0dfa19820eee6/master/w_320,c_limit/The%20Feelies%20%E2%80%93%20Crazy%20Rhythms.jpg", "label": "Stiff", "year": "1980", "links": [["Bandcamp", "https://thefeelies.bandcamp.com/album/crazy-rhythms"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Feelies%3A%20Crazy%20Rhythms"}, {"rank": 78, "artist": "Mac DeMarco", "album": "Salad Days", "img": "https://media.pitchfork.com/photos/6aee2be6ac3c503f2a26a65b/master/w_320,c_limit/Mac%20DeMarco%20%E2%80%93%20Salad%20Days.jpg", "label": "Captured Tracks", "year": "2014", "links": [["Bandcamp", "https://macdemarco.bandcamp.com/album/salad-days"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Mac%20DeMarco%3A%20Salad%20Days"}, {"rank": 79, "artist": "MJ Lenderman", "album": "Boat Songs", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eecd/master/w_320,c_limit/MJ%20Lenderman%20%E2%80%93%20Boat%20Songs.jpg", "label": "Dear Life", "year": "2022", "links": [["Bandcamp", "https://mjlenderman.bandcamp.com/album/boat-songs"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=MJ%20Lenderman%3A%20Boat%20Songs"}, {"rank": 80, "artist": "Archers of Loaf", "album": "Icky Mettle", "img": "https://media.pitchfork.com/photos/6aee2be8d1ad83d11d558022/master/w_320,c_limit/Archers%20of%20Loaf%20%E2%80%94%20Icky%20Mettle.png", "label": "Alias", "year": "1993", "links": [["Bandcamp", "https://archersofloaf.bandcamp.com/album/icky-mettle-reissue"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Archers%20of%20Loaf%3A%20Icky%20Mettle"}, {"rank": 81, "artist": "Broadcast", "album": "Tender Buttons", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9d1/master/w_320,c_limit/Broadcast%20%E2%80%93%20Tender%20Buttons.jpg", "label": "Warp", "year": "2005", "links": [["Bandcamp", "https://broadcast.bandcamp.com/album/tender-buttons"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Broadcast%3A%20Tender%20Buttons"}, {"rank": 82, "artist": "The Dismemberment Plan", "album": "Emergency & I", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eecb/master/w_320,c_limit/The%20Dismemberment%20Plan%20%E2%80%93%20Emergency%20&amp;%20I.jpg", "label": "DeSoto", "year": "1999", "links": [["Apple Music", "https://music.apple.com/us/album/emergency-i/6561716"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Dismemberment%20Plan%3A%20Emergency%20%26%20I"}, {"rank": 83, "artist": "Sharon Van Etten", "album": "Are We There", "img": "https://media.pitchfork.com/photos/6aee2be6d1ad83d11d557ff6/master/w_320,c_limit/Sharon%20Van%20Etten%20%E2%80%93%20Are%20We%20There.jpg", "label": "Jagjaguwar", "year": "2014", "links": [["Bandcamp", "https://sharonvanetten.bandcamp.com/album/are-we-there"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Sharon%20Van%20Etten%3A%20Are%20We%20There"}, {"rank": 84, "artist": "The Sea and Cake", "album": "The Fawn", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2661/master/w_320,c_limit/The%20Sea%20and%20Cake%20%E2%80%93%20The%20Fawn.jpg", "label": "Thrill Jockey", "year": "1997", "links": [["Bandcamp", "https://theseaandcake.bandcamp.com/album/the-fawn"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20Sea%20and%20Cake%3A%20The%20Fawn"}, {"rank": 85, "artist": "Mirah", "album": "You Think It’s Like This but Really It’s Like This", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2633/master/w_320,c_limit/Mirah%20%E2%80%93%20You%20Think%20It%E2%80%99s%20Like%20This%20but%20Really%20It%E2%80%99s%20Like%20This.jpg", "label": "K", "year": "2000", "links": [["Bandcamp", "https://mirah.bandcamp.com/album/you-think-its-like-this-but-really-its-like-this-20th-anniversary-reissue"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Mirah%3A%20You%20Think%20It%E2%80%99s%20Like%20This%20but%20Really%20It%E2%80%99s%20Like%20This"}, {"rank": 86, "artist": "The War on Drugs", "album": "Lost in the Dream", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba9e/master/w_320,c_limit/The%20War%20on%20Drugs%20%E2%80%93%20Lost%20in%20the%20Dream.jpg", "label": "Secretly Canadian", "year": "2014", "links": [["Bandcamp", "https://thewarondrugs.bandcamp.com/album/lost-in-the-dream"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20War%20on%20Drugs%3A%20Lost%20in%20the%20Dream"}, {"rank": 87, "artist": "Silkworm", "album": "Libertine", "img": "https://media.pitchfork.com/photos/6aee2be6d19586adfe8e3575/master/w_320,c_limit/Silkworm%20%E2%80%93%20Libertine.jpg", "label": "El Recordo/Comedy Minus One", "year": "1994", "links": [["Bandcamp", "https://skwm.bandcamp.com/album/libertine"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Silkworm%3A%20Libertine"}, {"rank": 88, "artist": "Liars", "album": "Drum’s Not Dead", "img": "https://media.pitchfork.com/photos/6aee2be72e98f66215d0ba93/master/w_320,c_limit/Liars%20%E2%80%93%20Drum%E2%80%99s%20Not%20Dead.jpg", "label": "Mute", "year": "2006", "links": [["Bandcamp", "https://liars.bandcamp.com/album/drums-not-dead"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Liars%3A%20Drum%E2%80%99s%20Not%20Dead"}, {"rank": 89, "artist": "Father John Misty", "album": "I Love You, Honeybear", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9d8/master/w_320,c_limit/Father%20John%20Misty%20%E2%80%93%20I%20Love%20You,%20Honeybear.jpg", "label": "Bella Union/Sub Pop", "year": "2015", "links": [["Bandcamp", "https://fatherjohnmisty.bandcamp.com/album/i-love-you-honeybear"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Father%20John%20Misty%3A%20I%20Love%20You%2C%20Honeybear"}, {"rank": 90, "artist": "Angel Olsen", "album": "My Woman", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eec5/master/w_320,c_limit/Angel%20Olsen%20%E2%80%93%20My%20Woman.jpg", "label": "Jagjaguwar", "year": "2016", "links": [["Bandcamp", "https://angelolsen.bandcamp.com/album/my-woman"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Angel%20Olsen%3A%20My%20Woman"}, {"rank": 91, "artist": "Speedy Ortiz", "album": "Major Arcana", "img": "https://media.pitchfork.com/photos/6aee2be806e89e006e0faf2a/master/w_320,c_limit/Speedy%20Ortiz%20%E2%80%93%20Major%20Arcana.jpg", "label": "Carpark", "year": "2013", "links": [["Bandcamp", "https://speedyortiz.bandcamp.com/album/major-arcana"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Speedy%20Ortiz%3A%20Major%20Arcana"}, {"rank": 92, "artist": "The White Stripes", "album": "De Stijl", "img": "https://media.pitchfork.com/photos/6aee2be6aa16e3fed6ea2646/master/w_320,c_limit/The%20White%20Stripes%20%E2%80%93%20De%20Stijl.jpg", "label": "Sympathy for the Record Industry", "year": "2000", "links": [["Apple Music", "https://music.apple.com/us/album/de-stijl/1533513577"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=The%20White%20Stripes%3A%20De%20Stijl"}, {"rank": 93, "artist": "Wednesday", "album": "Rat Saw God", "img": "https://media.pitchfork.com/photos/6aee2be7d1ad83d11d558013/master/w_320,c_limit/Wednesday%20%E2%80%93%20Rat%20Saw%20God.jpg", "label": "Dead Oceans", "year": "2023", "links": [["Bandcamp", "https://wednesdayband.bandcamp.com/album/rat-saw-god"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Wednesday%3A%20Rat%20Saw%20God"}, {"rank": 94, "artist": "Of Montreal", "album": "Hissing Fauna, Are You the Destroyer?", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eec7/master/w_320,c_limit/of%20Montreal%20%E2%80%93%20Hissing%20Fauna,%20Are%20You%20the%20Destroyer-.jpg", "label": "Polyvinyl", "year": "2007", "links": [["Bandcamp", "https://ofmontreal.bandcamp.com/album/hissing-fauna-are-you-the-destroyer"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Of%20Montreal%3A%20Hissing%20Fauna%2C%20Are%20You%20the%20Destroyer%3F"}, {"rank": 95, "artist": "American Music Club", "album": "Everclear", "img": "https://media.pitchfork.com/photos/6aee2be6b0fa15a54106b9d2/master/w_320,c_limit/American%20Music%20Club%20%E2%80%93%20Everclear.jpg", "label": "Alias", "year": "1991", "links": [["Apple Music", "https://music.apple.com/us/album/everclear/206203877"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=American%20Music%20Club%3A%20Everclear"}, {"rank": 96, "artist": "My Morning Jacket", "album": "Z", "img": "https://media.pitchfork.com/photos/6aee2be62e98f66215d0ba88/master/w_320,c_limit/My%20Morning%20Jacket%20%E2%80%93%20Z.jpg", "label": "ATO", "year": "2005", "links": [["Bandcamp", "https://mymorningjacket.bandcamp.com/album/z"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=My%20Morning%20Jacket%3A%20Z"}, {"rank": 97, "artist": "Soccer Mommy", "album": "Clean", "img": "https://media.pitchfork.com/photos/6aee2be778d0dfa19820eeda/master/w_320,c_limit/Soccer%20Mommy%20%E2%80%93%20Clean.jpg", "label": "Fat Possum", "year": "2018", "links": [["Bandcamp", "https://sopharela.bandcamp.com/album/clean"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Soccer%20Mommy%3A%20Clean"}, {"rank": 98, "artist": "Times New Viking", "album": "Dancer Equired", "img": "https://media.pitchfork.com/photos/6aee2be606e89e006e0faf03/master/w_320,c_limit/Times%20New%20Viking%20%E2%80%93%20Dancer%20Equired.jpg", "label": "Merge", "year": "2011", "links": [["Apple Music", "https://music.apple.com/ng/album/dancer-equired/671855489"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Times%20New%20Viking%3A%20Dancer%20Equired"}, {"rank": 99, "artist": "Les Savy Fav", "album": "Let’s Stay Friends", "img": "https://media.pitchfork.com/photos/6aee2be678d0dfa19820eec9/master/w_320,c_limit/Les%20Savy%20Fav%20%E2%80%93%20Let%E2%80%99s%20Stay%20Friends.jpg", "label": "Frenchkiss", "year": "2007", "links": [["Apple Music", "https://music.apple.com/us/album/lets-stay-friends/262587593"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Les%20Savy%20Fav%3A%20Let%E2%80%99s%20Stay%20Friends"}, {"rank": 100, "artist": "Bedhead", "album": "Transaction de Novo", "img": "https://media.pitchfork.com/photos/6aeb8dd7a66e1f9061623432/master/w_320,c_limit/bedhead%20transaction%20de%20novio.jpg", "label": "Trance Syndicate", "year": "1998", "links": [["Bandcamp", "https://bedhead.bandcamp.com/album/transaction-de-novo"]], "pf": "https://pitchfork.com/story/the-100-best-indie-rock-albums-of-all-time/#:~:text=Bedhead%3A%20Transaction%20de%20Novo"}];
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const big = u => u ? u.replace('w_320,','w_640,') : '';
+
+// ransom-note masthead
+(() => {
+  const styles = ['a','b','c','d','e'];
+  const h = document.getElementById('ransom');
+  let i = 0;
+  h.innerHTML = 'INDIE ROCK 100'.split(' ').map(w =>
+    `<span class="word" aria-hidden="true">${[...w].map(ch => {
+      const s = styles[(i*3 + ch.charCodeAt(0)) % styles.length];
+      const r = ((i*37) % 11) - 5; i++;
+      return `<span class="l ${s}" style="transform:rotate(${r}deg)">${esc(ch)}</span>`;
+    }).join('')}</span>`).join('');
+})();
+
+function row(a){
+  return `
+<li class="${a.rank<=10?'top':''}">
+  <details class="rec">
+    <summary>
+      <span class="num"><small>No.</small>${pad(a.rank)}</span>
+      <span class="pic"><span class="tape"></span><img src="${esc(a.img)}" alt="${esc(a.artist)}, ${esc(a.album)} cover" loading="lazy" width="84" height="84"></span>
+      <span class="who">
+        <div class="artist">${esc(a.artist)}</div>
+        <div class="album">${esc(a.album)}</div>
+        <div class="tags"><span class="stamp">${esc(a.label)}</span><span class="yr">${esc(a.year)}</span></div>
+      </span>
+      <span class="toggle" aria-hidden="true">+</span>
+    </summary>
+    <div class="jcard">
+      <div class="front">
+        <img data-src="${esc(big(a.img))}" alt="">
+        <div class="cap">${esc(a.artist)}<br>${esc(a.album)}</div>
+      </div>
+      <div class="spine"><span>${esc(a.artist)}</span><span>No. ${pad(a.rank)}</span></div>
+      <div class="back">
+        <h3>Side ${a.rank<=50?'A':'B'} / Track ${pad(a.rank)}</h3>
+        <dl>
+          <dt>Band</dt><dd>${esc(a.artist)}</dd>
+          <dt>Record</dt><dd>${esc(a.album)}</dd>
+          <dt>Label</dt><dd>${esc(a.label)}</dd>
+          <dt>Year</dt><dd>${esc(a.year)}</dd>
+        </dl>
+        <a class="read" href="${esc(a.pf)}" target="_blank" rel="noopener">Read the review on Pitchfork &rarr;<em>jumps straight to No. ${a.rank} in the original story</em></a>
+        ${a.links.length ? `<div class="listen"><span>Listen:</span>${a.links.map(([t,u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join('')}</div>` : ''}
+      </div>
+    </div>
+  </details>
+</li>`;
+}
+
+const side = (label, note, items) => `
+<section>
+  <div class="side-head"><h2>${label}</h2><span>${note}</span></div>
+  <ol class="list">${items.map(row).join('')}</ol>
+</section>`;
+
+document.getElementById('list').innerHTML =
+  side('SIDE A', 'No. 1 to 50', ALBUMS.filter(a => a.rank <= 50)) +
+  side('SIDE B', 'No. 51 to 100', ALBUMS.filter(a => a.rank > 50));
+
+document.getElementById('list').addEventListener('toggle', e => {
+  const d = e.target;
+  if(!(d instanceof HTMLDetailsElement) || !d.open) return;
+  const img = d.querySelector('.jcard img');
+  if(img && img.dataset.src){ img.src = img.dataset.src; delete img.dataset.src; }
+}, true);
+</script>
+<a href="./" style="position:fixed;left:12px;bottom:12px;z-index:9999;background:#111;color:#fff;font:700 12px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;text-decoration:none;padding:9px 12px;border-radius:999px;box-shadow:0 3px 10px rgba(0,0,0,.4)">&larr; 6 STYLES</a>
+</body>
+</html>
